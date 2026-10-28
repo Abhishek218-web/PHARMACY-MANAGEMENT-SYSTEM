@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaCare Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <aside class="sidebar">
+        <h2>💊 PharmaCare</h2>
+        <p class="menu-title">MAIN MENU</p>
+        <a class="active" href="#dashboard">▦ Dashboard</a>
+        <a href="#inventory">▤ Medicine Inventory</a>
+        <a href="#billing">🧾 Sales & Billing</a>
+        <a href="#alerts">⚠ Stock Alerts</a>
+        <div class="sidebar-bottom">Pharmacy Management System</div>
+    </aside>
+
+    <main class="main-content">
+        <header>
+            <div>
+                <h1>Dashboard</h1>
+                <p>Welcome to your pharmacy management system.</p>
+            </div>
+            <div class="admin">👤 Administrator</div>
+        </header>
+
+        <section class="cards" id="dashboard">
+            <div class="card blue">
+                <span>Total Medicines</span>
+                <h2 id="totalMedicines">0</h2>
+                <p>Items in inventory</p>
+            </div>
+            <div class="card green">
+                <span>Total Stock Units</span>
+                <h2 id="totalStock">0</h2>
+                <p>Available quantity</p>
+            </div>
+            <div class="card orange">
+                <span>Low Stock Items</span>
+                <h2 id="lowStock">0</h2>
+                <p>Needs attention</p>
+            </div>
+            <div class="card red">
+                <span>Expired Medicines</span>
+                <h2 id="expiredStock">0</h2>
+                <p>Check expiry dates</p>
+            </div>
+        </section>
+
+        <section class="panel" id="inventory">
+            <div class="panel-heading">
+                <div>
+                    <h2>Medicine Inventory</h2>
+                    <p>View and search available medicines</p>
+                </div>
+                <input id="searchInput" type="search"
+                       placeholder="Search medicine..."
+                       oninput="renderMedicines()">
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Medicine</th>
+                            <th>Price (₹)</th>
+                            <th>Stock</th>
+                            <th>Expiry Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="medicineTable"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel" id="billing">
+            <div class="panel-heading">
+                <div>
+                    <h2>Sales & Billing</h2>
+                    <p>Record a medicine sale</p>
+                </div>
+            </div>
+
+            <form id="saleForm">
+                <label for="medicineId">Medicine</label>
+                <select id="medicineId" required></select>
+
+                <label for="quantity">Quantity</label>
+                <input id="quantity" type="number" min="1"
+                       placeholder="Enter quantity" required>
+
+                <button type="submit">Process Sale</button>
+            </form>
+            <p id="saleMessage" role="status"></p>
+        </section>
+
+        <section class="panel" id="alerts">
+            <h2>Stock Alerts</h2>
+            <div id="alertList">Loading alerts...</div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
